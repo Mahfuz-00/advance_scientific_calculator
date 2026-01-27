@@ -30,6 +30,15 @@ android {
         versionName = flutter.versionName
     }
 
+    applicationVariants.all {
+        outputs.all {
+            val appName = "Advance Scientific Calculator"
+            val cleanVersion = versionName?.replace("[^0-9a-zA-Z.]".toRegex(), "_")
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                "${appName}_v${cleanVersion}_${buildType.name}.apk"
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
