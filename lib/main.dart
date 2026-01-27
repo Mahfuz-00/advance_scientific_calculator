@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'Core/Injection/injection_container.dart' as di;
 import 'Features/Calculator/Presentation/Bloc/calculator_bloc.dart';
 import 'Features/Calculator/Presentation/Screens/calculator_page.dart';
-import 'Core/Injection/injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

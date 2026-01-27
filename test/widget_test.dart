@@ -1,30 +1,38 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:advance_scientific_calculator/Features/Calculator/Presentation/Screens/calculator_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:advance_scientific_calculator/main.dart';
+import 'package:advance_scientific_calculator/Core/Injection/injection_container.dart' as di;
+import 'package:advance_scientific_calculator/Features/Calculator/Presentation/Bloc/calculator_bloc.dart';
+import 'package:advance_scientific_calculator/Features/Calculator/Presentation/Widgets/calc_button.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  setUpAll(() async {
+    await di.init();
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('Calculator page loads correctly', (WidgetTester tester) async {
+    final bloc = di.sl<CalculatorBloc>();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: BlocProvider.value(
+          value: bloc,
+          child: const CalculatorPage(),
+        ),
+      ),
+    );
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.pumpAndSettle();
+
+    // Page title must exist
+    expect(find.text('Scientific Calculator'), findsOneWidget);
+
+    // At least some buttons must exist
+    expect(find.byType(CalcButton), findsAtLeastNWidgets(10));
+
+    // App should not crash and page should render
+    expect(find.byType(Scaffold), findsOneWidget);
   });
 }
