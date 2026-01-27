@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import '../../../../Core/Error/failures.dart';
 import '../Repositories/calculator_repository.dart';
 

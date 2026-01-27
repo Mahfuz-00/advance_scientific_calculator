@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Domain/Usecases/evaluate_expression.dart';
 import '../../Domain/Usecases/save_to_history.dart';

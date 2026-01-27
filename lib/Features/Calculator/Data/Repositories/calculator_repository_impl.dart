@@ -13,8 +13,10 @@ class CalculatorRepositoryImpl implements CalculatorRepository {
   @override
   Future<Either<Failure, double>> evaluate(String expression) async {
     try {
-      Parser p = Parser();
-      Expression exp = p.parse(expression);
+      // Parser p = Parser();
+      // Expression exp = p.parse(expression);
+      final parser = ShuntingYardParser();
+      final exp = parser.parse(expression);
       ContextModel cm = ContextModel();
       double result = exp.evaluate(EvaluationType.REAL, cm);
       return Right(result);
