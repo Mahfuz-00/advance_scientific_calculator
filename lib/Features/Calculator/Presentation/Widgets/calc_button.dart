@@ -9,7 +9,7 @@ class CalcButton extends StatelessWidget {
   const CalcButton({
     super.key,
     required this.text,
-    this.color = Colors.blueGrey,
+    this.color = const Color(0xFF2D2D2E), // Subtle dark grey default
   });
 
   @override
@@ -19,7 +19,6 @@ class CalcButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           final bloc = context.read<CalculatorBloc>();
-
           if (text == '=') {
             bloc.add(Calculate());
           } else if (text == 'C') {
@@ -32,9 +31,24 @@ class CalcButton extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          foregroundColor: Colors.white,
+          padding: EdgeInsets.zero, // Remove default padding to prevent 2-line wrap
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          elevation: 0,
         ),
-        child: Text(text, style: const TextStyle(fontSize: 24)),
+        child: Center(
+          child: FittedBox(
+            fit: BoxFit.scaleDown, // Shrinks text to fit if it's too wide
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

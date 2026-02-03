@@ -47,4 +47,14 @@ class CalculatorRepositoryImpl implements CalculatorRepository {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteHistory() async {
+    try {
+      await storage.delete(key: historyKey);
+      return const Right(null);
+    } catch (e) {
+      return Left(CacheFailure());
+    }
+  }
 }

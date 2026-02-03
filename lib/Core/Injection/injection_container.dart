@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../Features/Calculator/Data/Repositories/calculator_repository_impl.dart';
 import '../../Features/Calculator/Domain/Repositories/calculator_repository.dart';
+import '../../Features/Calculator/Domain/Usecases/delete_history.dart';
 import '../../Features/Calculator/Domain/Usecases/evaluate_expression.dart';
 import '../../Features/Calculator/Domain/Usecases/get_history.dart';
 import '../../Features/Calculator/Domain/Usecases/save_to_history.dart';
@@ -23,6 +24,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => EvaluateExpression(sl()));
   sl.registerLazySingleton(() => SaveToHistory(sl()));
   sl.registerLazySingleton(() => GetHistory(sl()));
+  sl.registerLazySingleton(() => DeleteHistory(sl()));
 
   // Bloc
   sl.registerFactory(
@@ -30,6 +32,7 @@ Future<void> init() async {
       evaluate: sl(),
       saveHistory: sl(),
       getHistory: sl(),
+          deleteHistory: sl(),
     ),
   );
 }

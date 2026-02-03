@@ -19,3 +19,5 @@ class Backspace extends CalculatorEvent {}
 class Calculate extends CalculatorEvent {}
 
 class LoadHistory extends CalculatorEvent {}
+
+class ClearHistory extends CalculatorEvent {}

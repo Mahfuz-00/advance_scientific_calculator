@@ -5,4 +5,5 @@ abstract class CalculatorRepository {
   Future<Either<Failure, double>> evaluate(String expression);
   Future<Either<Failure, void>> saveHistory(String entry);
   Future<Either<Failure, List<String>>> getHistory();
+  Future<Either<Failure, void>> deleteHistory();
 }
